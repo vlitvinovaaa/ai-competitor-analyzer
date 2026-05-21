@@ -18,7 +18,7 @@ export const HARDCODED_COMPETITORS: Competitor[] = [
   },
   {
     name: 'Well Bud',
-    website: 'https://well-bud.com.ua',
+    website: 'https://well-bud.com',
     facebookPage: 'wellbud',
   },
 ];

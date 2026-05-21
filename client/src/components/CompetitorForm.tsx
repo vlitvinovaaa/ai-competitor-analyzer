@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button, Card, Input, Space, Typography } from 'antd';
 import { EditOutlined, PlusOutlined } from '@ant-design/icons';
+import { useAnalyzeCompetitors } from '../hooks/useAnalyzeCompetitors.ts';
 
 const { Title, Text } = Typography;
 
@@ -11,6 +12,8 @@ const CLIENT_NAME = 'Big Ben';
 function CompetitorForm() {
   const [newCompetitor, setNewCompetitor] = useState('');
   const [additionalCompetitors, setAdditionalCompetitors] = useState<string[]>([]);
+  const { mutate, data, isPending } = useAnalyzeCompetitors();
+
 
   const addCompetitor = () => {
     const trimmed = newCompetitor.trim();
@@ -19,13 +22,9 @@ function CompetitorForm() {
     setNewCompetitor('');
   };
 
-  const handleAnalyze = () => {
-    const competitors = [
-      ...HARDCODED_COMPETITORS,
-      ...additionalCompetitors.map((name) => ({ name })),
-    ];
-    console.log('Analyze', { client: CLIENT_NAME, competitors });
-  };
+const handleAnalyze = () => {
+    mutate([...HARDCODED_COMPETITORS]);
+    };
 
   return (
     <div className="analyzer">
